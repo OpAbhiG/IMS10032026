@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td>${item.username}</td>
                 <td>${item.price || '-'}</td>
                 <td>${item.vendor}</td>
+                <td>${item.invoice_no}</td>
                 <td>${item.buyDate || '-'}</td>
                 <td>${item.registered_on || '-'}</td>
                 <td>${item.extraDetails || '-'}</td>

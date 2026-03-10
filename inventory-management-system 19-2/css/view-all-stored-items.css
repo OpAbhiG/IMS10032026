@@ -57,6 +57,41 @@ body {
     border-bottom: 1px solid #f1f3f5;
 }
 
+
+/* Force better table behavior */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
+}
+
+.table {
+    width: 100%;
+    min-width: 1200px;          /* prevents squishing on small screens – adjust as needed */
+    table-layout: auto;         /* or fixed if you want equal columns */
+}
+
+.table th, .table td {
+    padding: 0.75rem 0.5rem;    /* slightly smaller padding if too wide */
+    vertical-align: middle;
+    white-space: nowrap;        /* prevent unwanted wrapping in most cells */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Allow wrapping only where it makes sense */
+.table td.extra-details,
+.table td.invoice-no {
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* Actions column – keep narrow */
+.table td.actions-column {
+    width: 140px;
+    text-align: center;
+    white-space: nowrap;
+}
+
 .table-striped > tbody > tr:nth-of-type(odd) {
     background-color: #fcfcfd;
 }
