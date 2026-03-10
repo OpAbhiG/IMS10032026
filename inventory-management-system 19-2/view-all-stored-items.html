@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Stored Items - Inventory Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/view-all-stored-items.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white custom-navbar taller-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="dashboard.html">
+                <img src="assets/logo.webp" alt="Inventory Logo" height="40" class="me-2">
+                </i>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-4 pe-4">
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="item-registration.html">Register New Item</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="view-all-stored-items.html">View Items</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="profile.html">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <div class="container mt-5">
+        <div class="text-center mb-5">
+            <div class="d-inline-block bg-primary text-white rounded-circle p-4 mb-3 shadow">
+                <i class="fas fa-boxes-stacked fa-2x"></i>
+            </div>
+            <h2 class="fw-bold text-dark mb-2">View All Inventory Items</h2>
+            <p class="text-muted fs-5">Search, filter, manage, and track your stored assets efficiently</p>
+        </div>
+        <div class="card p-4 shadow-sm">
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <div class="input-group shadow-sm">
+                        <span class="input-group-text bg-light">
+                            <i class="fas fa-search text-primary"></i>
+                        </span>
+                        <input type="text" class="form-control" id="searchInput"
+                            placeholder="Search by name, model, or serial number">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-group shadow-sm">
+                        <span class="input-group-text bg-light">
+                            <i class="fas fa-filter text-primary"></i>
+                        </span>
+                        <select class="form-select" id="filterType">
+                            <option value="all">All Item Types</option>
+                            <option value="Monitor">Monitor</option>
+                            <option value="CPU">CPU</option>
+                            <option value="Keyboard Wire">Keyboard Wire</option>
+                            <option value="Keyboard Wireless">Keyboard Wireless</option>
+                            <option value="Mouse Wire">Mouse Wire</option>
+                            <option value="Mouse Wireless">Mouse Wireless</option>
+                            <option value="UPS">UPS</option>
+                            <option value="Headphone">Headphone</option>
+                            <option value="Printer">Printer</option>
+                            <option value="Scanner">Scanner</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-sort="srno">Sr.No<i class="fas fa-sort"></i></th>
+                                <th class="sortable" data-sort="name">Item Name <i class="fas fa-sort"></i></th>
+                                <th class="sortable" data-sort="model">Model <i class="fas fa-sort"></i></th>
+                                <th class="sortable" data-sort="serialNumber">Serial Number <i class="fas fa-sort"></i>
+                                </th>
+                                <th class="sortable" data-sort="user">User <i class="fas fa-sort"></i></th>
+                                <th class="sortable" data-sort="price">Price <i class="fas fa-sort"></i></th>
+                                <th class="sortable" data-sort="vendor">Vendor <i class="fas fa-sort"></i></th>
+                                
+                                <th class="sortable" data-sort="buyDate">Purchase Date <i class="fas fa-sort"></i></th>
+                                 <th class="sortable" data-sort="registered_on">Registered On <i class="fas fa-sort"></i></th>
+                                <th>Extra Details</th>
+                                <th class="sortable" data-sort="updatedDate">Updated Date <i class="fas fa-sort"></i>
+                                </th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemsTableBody">
+                            <!-- Items will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Item Modal org-->
+        <!-- <div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editItemForm">
+                            <input type="hidden" id="editItemCategory">
+                            <input type="hidden" id="editItemIndex">
+                            <div class="mb-3">
+                                <label for="editItemName" class="form-label">Item Name *</label>
+                                <input type="text" class="form-control" id="editItemName" readonly required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editModel" class="form-label">Model *</label>
+                                <input type="text" class="form-control" id="editModel" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editSerialNumber" class="form-label">Serial Number *</label>
+                                <input type="text" class="form-control" id="editSerialNumber" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editUser" class="form-label">User *</label>
+                                <input type="text" class="form-control" id="editUser" required>
+                            </div>
+
+
+
+                            <div class="mb-3">
+                                <label for="editVendor" class="form-label">Vendor</label>
+                                <input type="text" class="form-control" id="editVendor">
+                            </div>
+
+
+
+
+                            <div class="mb-3">
+                                <label for="editPrice" class="form-label">Price</label>
+                                <input type="number" class="form-control" id="editPrice">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editBuyDate" class="form-label">Buy Date</label>
+                                <input type="date" class="form-control" id="editBuyDate">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editExtraDetails" class="form-label">Extra Details</label>
+                                <textarea class="form-control" id="editExtraDetails" rows="4"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="saveEditBtn">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
+
+<!-- Modern & Professional Edit Modal -->
+<div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-xl rounded-4 overflow-hidden">
+            <!-- Header -->
+            <div class="modal-header bg-gradient-primary text-white border-0 py-4">
+                <div class="d-flex align-items-center">
+                    <div class="bg-white text-primary rounded-circle p-3 me-3 shadow-sm">
+                        <i class="fas fa-edit fa-lg"></i>
+                    </div>
+                    <h5 class="modal-title text-white fw-bold fs-4 mb-0" id="editItemModalLabel">Edit Inventory Item</h5>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body p-4 p-md-5 bg-light">
+                <form id="editItemForm">
+                    <input type="hidden" id="editItemCategory">
+                    <input type="hidden" id="editItemIndex">
+
+                    <div class="row g-4">
+                        <!-- Column 1 -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label for="editItemName" class="form-label fw-semibold fs-5">Item Name <span class="text-danger">*</span></label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-white border"><i class="fas fa-box text-primary"></i></span>
+                                    <input type="text" class="form-control shadow-sm border" id="editItemName" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="editModel" class="form-label fw-semibold fs-5">Model <span class="text-danger">*</span></label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-white border"><i class="fas fa-barcode text-primary"></i></span>
+                                    <input type="text" class="form-control shadow-sm border" id="editModel" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="editSerialNumber" class="form-label fw-semibold fs-5">Serial Number <span class="text-danger">*</span></label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-white border"><i class="fas fa-hashtag text-primary"></i></span>
+                                    <input type="text" class="form-control shadow-sm border" id="editSerialNumber" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="editUser" class="form-label fw-semibold fs-5">Assigned User <span class="text-danger">*</span></label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-white border"><i class="fas fa-user text-primary"></i></span>
+                                    <input type="text" class="form-control shadow-sm border" id="editUser" required placeholder="e.g. Dr. Abhishek">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label for="editVendor" class="form-label fw-semibold fs-5">Vendor / Supplier</label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-white border"><i class="fas fa-building text-primary"></i></span>
+                                    <input type="text" class="form-control shadow-sm border" id="editVendor" placeholder="e.g. HP India, Dell">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="editPrice" class="form-label fw-semibold fs-5">Price</label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-white border">₹</span>
+                                    <input type="number" class="form-control shadow-sm border" id="editPrice" step="0.01" placeholder="0.00">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="editBuyDate" class="form-label fw-semibold fs-5">Purchase Date</label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-white border"><i class="fas fa-calendar-alt text-primary"></i></span>
+                                    <input type="date" class="form-control shadow-sm border" id="editBuyDate">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="editExtraDetails" class="form-label fw-semibold fs-5">Extra Details / Notes</label>
+                                <textarea class="form-control shadow-sm border" id="editExtraDetails" rows="5" placeholder="Warranty info, condition, location, additional remarks..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer border-0 bg-light px-5 py-4 justify-content-center">
+                <button type="button" class="btn btn-secondary btn-lg px-5 py-3 shadow fw-bold" data-bs-dismiss="modal">
+                    <i class="fas me-2"></i> Cancel
+                </button>
+                <button type="button" class="btn btn-primary btn-lg px-5 py-3 shadow fw-bold" id="saveEditBtn">
+                    <i class="fas me-2"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Delete Confirmation Modal -->
+        <!-- Delete Confirmation Modal - Matches theme -->
+<div class="modal fade" id="deleteItemModal" tabindex="-1" aria-labelledby="deleteItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-xl rounded-4 overflow-hidden">
+            <!-- Header -->
+            <div class="modal-header bg-danger text-white border-0 py-4">
+                <div class="d-flex align-items-center">
+                    <div class="bg-white text-danger rounded-circle p-3 me-3 shadow-sm">
+                        <i class="fas fa-trash-alt fa-lg"></i>
+                    </div>
+                    <h5 class="modal-title text-white fs-4 mb-0" id="deleteItemModalLabel">Confirm Deletion</h5>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body text-center p-5 bg-light">
+                <i class="fas fa-exclamation-triangle text-danger fa-4x mb-4"></i>
+                <h5 class="fw-bold mb-3">Are you sure?</h5>
+                <p class="text-muted fs-5 mb-0">This will permanently delete the item from inventory. This action cannot be undone.</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer border-0 bg-light px-5 py-4 justify-content-center">
+                <button type="button" class="btn btn-outline-secondary btn-lg px-5 py-3 fw-bold me-3" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i> Cancel
+                </button>
+                <button type="button" class="btn btn-danger btn-lg px-5 py-3 fw-bold shadow" id="confirmDeleteBtn">
+                    <i class="fas fa-trash me-2"></i> Delete Item
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Relocate Item Modal org-->
+        <!-- <div class="modal fade" id="relocateItemModal" tabindex="-1" aria-labelledby="relocateItemModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="relocateItemModalLabel">Relocate Item</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="relocateItemForm">
+                            <input type="hidden" id="relocateItemCategory">
+                            <input type="hidden" id="relocateItemIndex">
+                            <div class="mb-3">
+                                <label for="relocateFromLocation" class="form-label">From Location *</label>
+                                <input type="text" class="form-control" id="relocateFromLocation" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="relocateToLocation" class="form-label">To Location *</label>
+                                <input type="text" class="form-control" id="relocateToLocation" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="relocateBy" class="form-label">Relocated By *</label>
+                                <input type="text" class="form-control" id="relocateBy" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="assignedTo" class="form-label">Assigned To *</label>
+                                <input type="text" class="form-control" id="assignedTo" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="relocateReason" class="form-label">Reason for Relocation</label>
+                                <textarea class="form-control" id="relocateReason" rows="4"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="saveRelocateBtn">Save Relocation</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
+        <!-- Modern & Professional Relocate Modal (matches Edit Modal style) -->
+<div class="modal fade" id="relocateItemModal" tabindex="-1" aria-labelledby="relocateItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-xl rounded-4 overflow-hidden">
+            <!-- Header -->
+            <div class="modal-header bg-gradient-primary text-white border-0 py-4">
+                <div class="d-flex align-items-center">
+                    <div class="bg-white text-primary rounded-circle p-3 me-3 shadow-sm">
+                        <i class="fas fa-arrows-alt fa-lg"></i>
+                    </div>
+                    <h5 class="modal-title text-white fs-4 mb-0" id="relocateItemModalLabel">Relocate Inventory Item</h5>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body p-4 p-md-5 bg-light">
+                <form id="relocateItemForm">
+                    <input type="hidden" id="relocateItemCategory">
+                    <input type="hidden" id="relocateItemIndex">
+
+                    <div class="row g-4">
+                        <!-- Column 1 -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label for="relocateFromLocation" class="form-label fw-semibold fs-5">From Location <span class="text-danger">*</span></label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-white border"><i class="fas fa-map-marker-alt text-primary"></i></span>
+                                    <input type="text" class="form-control shadow-sm border" id="relocateFromLocation" required placeholder="Current location / department">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="relocateToLocation" class="form-label fw-semibold fs-5">To Location <span class="text-danger">*</span></label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-white border"><i class="fas fa-map-marker-alt text-primary"></i></span>
+                                    <input type="text" class="form-control shadow-sm border" id="relocateToLocation" required placeholder="New location / department">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="relocateBy" class="form-label fw-semibold fs-5">Relocated By <span class="text-danger">*</span></label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-white border"><i class="fas fa-user-check text-primary"></i></span>
+                                    <input type="text" class="form-control shadow-sm border" id="relocateBy" required placeholder="Your name / staff ID">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label for="assignedTo" class="form-label fw-semibold fs-5">Assigned To <span class="text-danger">*</span></label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-white border"><i class="fas fa-user-plus text-primary"></i></span>
+                                    <input type="text" class="form-control shadow-sm border" id="assignedTo" required placeholder="New responsible person / user">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="relocateReason" class="form-label fw-semibold fs-5">Reason for Relocation</label>
+                                <textarea class="form-control shadow-sm border" id="relocateReason" rows="6" placeholder="Reason / purpose of relocation (optional but recommended)..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer border-0 bg-light px-5 py-4 justify-content-center">
+                <button type="button" class="btn btn-outline-secondary btn-lg px-5 py-3 fw-bold me-3" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i> Cancel
+                </button>
+                <button type="button" class="btn btn-primary btn-lg px-5 py-3 fw-bold shadow" id="saveRelocateBtn">
+                    <i class="fas fa-exchange-alt me-2"></i> Save Relocation
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Relocation History Modal -->
+        <!-- History Modal - Matches Edit & Relocate style -->
+<div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content border-0 shadow-xl rounded-4 overflow-hidden">
+            <!-- Header -->
+            <div class="modal-header bg-gradient-primary text-white border-0 py-4">
+                <div class="d-flex align-items-center">
+                    <div class="bg-white text-primary rounded-circle p-3 me-3 shadow-sm">
+                        <i class="fas fa-history fa-lg"></i>
+                    </div>
+                    <h5 class="modal-title fw-bold fs-4 mb-0 text-white" id="historyModalLabel">Relocation History</h5>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body p-4 p-md-5 bg-light">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead class="table-primary text-white">
+                            <tr>
+                                <th>From Location</th>
+                                <th>To Location</th>
+                                <th>Relocated By</th>
+                                <th>Assigned To</th>
+                                <th>Reason</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <!-- History rows populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Empty state -->
+                <div id="noHistoryMessage" class="text-center py-5 text-muted d-none">
+                    <i class="fas fa-history fa-4x mb-3 opacity-50"></i>
+                    <h5>No relocation history available for this item.</h5>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer border-0 bg-light px-5 py-4 justify-content-center">
+                <button type="button" class="btn btn-primary btn-lg px-5 py-3 fw-bold shadow" data-bs-dismiss="modal">
+                    <i class=" me-2"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Toast Container -->
+        <!-- <div class="toast position-fixed bottom-0 end-0 m-3" id="successToast" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body"></div>
+        </div> -->
+
+        <!-- Relocation Toast -->
+        <!-- <div class="toast position-fixed bottom-0 end-0 m-3" id="relocateToast" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="toast-header bg-info text-white">
+                <strong class="me-auto">Relocation</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Item relocated successfully!
+            </div>
+        </div> -->
+<!-- Success Toast -->
+<div class="toast position-fixed bottom-0 end-0 m-4 shadow-lg" id="successToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header bg-success text-white border-0">
+        <i class="fas fa-check-circle me-2"></i>
+        <strong class="me-auto">Success</strong>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body bg-white">
+        Item updated successfully!
+    </div>
+</div>
+
+<!-- Relocation Toast -->
+<div class="toast position-fixed bottom-0 end-0 m-4 shadow-lg" id="relocateToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header bg-info text-white border-0">
+        <i class="fas fa-exchange-alt me-2"></i>
+        <strong class="me-auto">Relocated</strong>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body bg-white">
+        Item has been relocated successfully!
+    </div>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/view-all-stored-items.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register New Item - Inventory Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/item-registration.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white custom-navbar taller-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="dashboard.html">
+                <img src="assets/logo.webp" alt="Inventory Logo" height="40" class="me-2">
+                </i>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-4 pe-4">
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="item-registration.html">Register New Item</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="view-all-stored-items.html">View Items</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="profile.html">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-9">
+                <!-- Header -->
+                <div class="text-center mb-5">
+                    <div class="d-inline-block bg-primary text-white rounded-circle p-4 mb-3 shadow">
+                        <i class="fas fa-box-open fa-2x"></i>
+                    </div>
+                    <h2 class="fw-bold text-dark mb-2">Register New Inventory Item</h2>
+                    <p class="text-muted fs-5">Add detailed information to update your inventory</p>
+                </div>
+
+                <!-- Main Card -->
+                <div class="card border-0 shadow-xl rounded-4 overflow-hidden">
+                    <div class="card-body p-4 p-md-5 bg-white">
+
+                        <!-- Step 1: Category Selection -->
+                        <div id="itemSelection" class="mb-5">
+                            <label class="form-label fw-bold fs-4 mb-3 d-block text-center">Select Item Category <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg shadow-sm border-primary rounded-3" id="itemType"
+                                required>
+                                <option value="" disabled selected>Choose category...</option>
+                                <option value="Monitor">Monitor</option>
+                                <option value="CPU">CPU</option>
+                                <option value="Keyboard Wire">Keyboard (Wired)</option>
+                                <option value="Keyboard Wireless">Keyboard (Wireless)</option>
+                                <option value="Mouse Wire">Mouse (Wired)</option>
+                                <option value="Mouse Wireless">Mouse (Wireless)</option>
+                                <option value="UPS">UPS</option>
+                                <option value="Headphone">Headphone</option>
+                                <option value="Printer">Printer</option>
+                                <option value="Scanner">Scanner</option>
+                                <option value="Other">Other / Custom</option>
+                            </select>
+
+                            <div id="customItemDiv" class="mt-4" style="display: none;">
+                                <label class="form-label fw-bold fs-5">Custom Item Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-lg shadow-sm rounded-3"
+                                    id="customItem" placeholder="e.g. Special Medical Device" required>
+                            </div>
+
+                            <div class="d-grid mt-4">
+                                <button type="button" class="btn btn-primary btn-lg fw-bold py-3 rounded-3 shadow"
+                                    id="continueBtn">
+                                    <i class="fas fa-arrow-right me-2"></i> Proceed to Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Details Form -->
+                        <form id="itemForm" style="display: none;">
+                            <!-- Basic Info - 2×2 Grid -->
+                            <div class="mb-5">
+                                <h5 class="fw-bold text-primary mb-4 pb-2 border-bottom">
+                                    <i class="fas fa-info-circle me-2"></i> Basic Information
+                                </h5>
+
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Item Name <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg shadow-sm" id="itemName"
+                                            required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Model <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg shadow-sm" id="model"
+                                            required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Serial Number <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg shadow-sm"
+                                            id="serialNumber" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Assigned User <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg shadow-sm" id="username">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Purchase & Vendor Info -->
+                            <div class="mb-5">
+                                <h5 class="fw-bold text-primary mb-4 pb-2 border-bottom">
+                                    <i class="fas fa-receipt me-2"></i> Purchase Details
+                                </h5>
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Vendor / Supplier</label>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text bg-light"><i
+                                                    class="fas fa-building text-primary"></i></span>
+                                            <input type="text" class="form-control shadow-sm" id="vendor"
+                                                placeholder="e.g. HP India, Dell">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Purchase Price</label>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text bg-light">
+                                                <span class="text-primary fw-bold">₹</span>
+                                            </span>
+                                            <input type="number" class="form-control shadow-sm" id="price" step="0.01"
+                                                placeholder="0.00">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Purchase Date</label>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text bg-light">
+                                                <i class="fas fa-calendar-alt text-primary"></i>
+                                            </span>
+                                            <input type="date" class="form-control shadow-sm" id="buyDate">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Registered On</label>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text bg-light">
+                                                <i class="fas fa-calendar-alt text-primary"></i>
+                                            </span>
+                                            <input type="date" class="form-control shadow-sm" id="registered_on">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!-- org -->
+                            <!-- Extra Details -->
+                            <!-- <div class="mb-5">
+                                <h5 class="fw-bold text-primary mb-4 pb-2 border-bottom">
+                                    <i class="fas fa-note-sticky me-2"></i> Additional Notes
+                                </h5>
+                                <textarea class="form-control shadow-sm" id="extraDetails" rows="4"
+                                    placeholder="Warranty info, condition, location, any remarks..."></textarea>
+                            </div> -->
+                            <div class="mb-5">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="fw-bold text-dark mb-0">
+                                        <i class="fas fa-tags me-2 text-primary"></i> Custom Fields
+                                    </h5>
+                                    <button type="button" class="btn btn-outline-primary rounded-pill px-4"
+                                        id="addCustomFieldBtn">
+                                        <i class="fas fa-plus me-1"></i> Add Field
+                                    </button>
+                                </div>
+                                <div id="customFieldsContainer" class="bg-light border rounded-3 p-3"></div>
+                            </div>
+
+                            <!-- Upload File & Additional Details – Modern Side-by-Side Grid -->
+                            <!-- Supporting Documents & Notes – Side-by-Side Grid (Matches your current UI perfectly) -->
+                            <div class="mb-5">
+                                <h5 class="fw-bold text-primary mb-4 pb-2 border-bottom">
+                                    <i class="fas fa-file-upload me-2"></i> Supporting Documents & Additional Notes
+                                </h5>
+
+                                <div class="row g-4">
+                                    <!-- Left: File Upload -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Upload Supporting Document (PDF, Image,
+                                            etc.)</label>
+                                        <div class="upload-area border border-2 border-dashed rounded-3 p-4 text-center bg-white shadow-sm position-relative"
+                                            id="uploadArea" style="min-height: 220px; transition: all 0.3s ease;">
+
+                                            <!-- Hidden Input -->
+                                            <input type="file" class="d-none" id="fileUpload"
+                                                accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+
+                                            <!-- Default Upload UI -->
+                                            <div id="uploadDefault">
+                                                <i
+                                                    class="fas fa-cloud-upload-alt fa-3x text-primary mb-3 d-block mx-auto"></i>
+                                                <h6 class="fw-semibold mb-2">Drag & Drop or Click to Upload</h6>
+                                                <p class="text-muted small mb-3">PDF, JPG, PNG, DOCX • Max 10MB</p>
+                                                <button type="button"
+                                                    class="btn btn-outline-primary rounded-pill px-4 py-2 mt-2"
+                                                    id="browseBtn">
+                                                    <i class="fas fa-folder-open me-2"></i> Browse File
+                                                </button>
+                                            </div>
+
+                                            <!-- Preview After Upload -->
+                                            <div id="uploadPreview" class="d-none">
+                                                <div class="position-relative mx-auto mb-3" style="max-width: 240px;">
+                                                    <img id="filePreview" class="img-fluid rounded shadow"
+                                                        style="max-height: 160px; object-fit: contain;" alt="Preview">
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-danger position-absolute top-0 end-0 rounded-circle p-1"
+                                                        id="removeFile">
+                                                        <i class="fas fa-times fa-xs"></i>
+                                                    </button>
+                                                </div>
+                                                <h6 class="fw-semibold mb-1 text-truncate" id="fileName"
+                                                    style="max-width: 100%;">Selected File</h6>
+                                                <p class="text-muted small mb-3" id="fileSize">Size: --</p>
+                                                <button type="button"
+                                                    class="btn btn-outline-primary btn-sm rounded-pill px-4"
+                                                    id="changeFileBtn">
+                                                    <i class="fas fa-sync-alt me-2"></i> Change
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right: Additional Details -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Additional Details / Remarks</label>
+                                        <textarea class="form-control shadow-sm" id="extraDetails" rows="8"
+                                            placeholder="Enter warranty information, current condition, physical location, maintenance notes, usage instructions, or any other important remarks..."></textarea>
+                                        <div class="form-text text-muted mt-2 small">
+                                            <i class="fas fa-info-circle me-1"></i> This will be shown in item details
+                                            view and reports.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Action Buttons -->
+                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center mt-5">
+                                <button type="submit"
+                                    class="btn btn-primary btn-lg fw-bold px-5 py-3 rounded-pill shadow">
+                                    <i class="fas fa-save me-2"></i> Save Item
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-lg px-5 py-3 rounded-pill"
+                                    onclick="document.getElementById('itemForm').reset()">
+                                    <i class="fas fa-eraser me-2"></i> Clear Form
+                                </button>
+                                <button type="button" class="btn btn-outline-danger btn-lg px-5 py-3 rounded-pill"
+                                    onclick="window.history.back()">
+                                    <i class="fas fa-times me-2"></i> Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="modal fade" id="confirmationModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-xl rounded-4">
+                    <div class="modal-header bg-success text-white border-0 rounded-top-4">
+                        <h5 class="modal-title fw-bold"><i class="fas fa-check-circle me-2"></i> Success!</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body text-center py-5">
+                        <i class="fas fa-box-open text-success fa-5x mb-4"></i>
+                        <h4 class="fw-bold mb-3">Item Added Successfully</h4>
+                        <p class="text-muted fs-5">Your new item is now in the inventory.</p>
+                    </div>
+                    <div class="modal-footer border-0 justify-content-center pb-5">
+                        <button type="button" class="btn btn-outline-primary px-5 py-3 me-3 fw-bold rounded-pill"
+                            id="addMoreBtn">
+                            Add Another
+                        </button>
+                        <button type="button" class="btn btn-primary px-5 py-3 fw-bold rounded-pill"
+                            onclick="window.location.href='dashboard.html'">
+                            Go to Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/item-registration.js"></script>
+
+        <!-- Auto-set today's date -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const buyDateInput = document.getElementById('buyDate');
+                if (buyDateInput) {
+                    const today = new Date().toISOString().split('T')[0];
+                    buyDateInput.value = today;
+                }
+
+                // Optional: Open native picker on focus (better mobile experience)
+                buyDateInput?.addEventListener('focus', function () {
+                    this.showPicker?.();
+                });
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const buyDateInput = document.getElementById('registered_on');
+                if (buyDateInput) {
+                    const today = new Date().toISOString().split('T')[0];
+                    buyDateInput.value = today;
+                }
+
+                // Optional: Open native picker on focus (better mobile experience)
+                buyDateInput?.addEventListener('focus', function () {
+                    this.showPicker?.();
+                });
+            });
+        </script>
+</body>
+
+</html>
