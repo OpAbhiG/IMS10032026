@@ -106,6 +106,11 @@ document.addEventListener('DOMContentLoaded', function () {
             username: document.getElementById('username').value,
             price: document.getElementById('price').value,
             vendor: document.getElementById('vendor').value,
+
+
+            // invoice_no: document.getElementById('invoice_no').value.trim() || null,
+
+            
             buyDate: document.getElementById('buyDate').value,
             registered_on: document.getElementById('registered_on').value,
             extraDetails: document.getElementById('extraDetails').value,
@@ -146,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 username: itemData.username,
                 price: itemData.price,
                 vendor: itemData.vendor,
+                invoice_no:invoice_no,
                 buyDate: itemData.buyDate,
                 registered_on: itemData.registered_on,
                 extraDetails: itemData.extraDetails,

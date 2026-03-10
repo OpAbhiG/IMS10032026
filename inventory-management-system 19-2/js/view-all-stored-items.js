@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td>${item.registered_on || '-'}</td>
                 <td>${item.extraDetails || '-'}</td>
                 <td>${formatTimestamp(item.updatedDate)}</td>
-            <td>
+            <td class="text-center">
                     <button class="btn btn-primary btn-sm" onclick="editItem('${item.category}', ${item.index})"><i class="fas fa-edit"></i></button>
                     <button class="btn btn-danger btn-sm" onclick="confirmDelete('${item.category}', ${item.index})"><i class="fas fa-trash"></i></button>
                     <button class="btn btn-warning btn-sm" onclick="relocateItem('${item.category}', ${item.index})"><i class="fas fa-arrows-alt"></i></button>
@@ -252,6 +252,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('editUser').value = item.username;
         document.getElementById('editPrice').value = item.price || '';
         document.getElementById('editVendor').value = item.vendor;
+        
+
         document.getElementById('editBuyDate').value = item.buyDate || '';
         document.getElementById('editExtraDetails').value = item.extraDetails || '';
         editItemModal.show();
@@ -374,9 +376,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 : null,
             vendor: document.getElementById("editVendor").value.trim(),
             buyDate: document.getElementById("editBuyDate").value || null,           
-            extraDetails: document.getElementById("editExtraDetails").value.trim() || null
+
+            // invoice_no: document.getElementById('invoice_no').value.trim() || null,
+
+            extraDetails: document.getElementById("editExtraDetails").value.trim() || null,
+            
         };
 
+        
         try {
             const response = await fetch(`${API_BASE_URL}/${asset.id}`, {
                 method: "PUT",
