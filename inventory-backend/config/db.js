@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 
 
-// 'root', 'Abhi@3278'
+// 'root', 'Admin@123'
 const sequelize = new Sequelize('asset_management', 'root', 'Abhi@3278', {  
   host: '127.0.0.1',
   dialect: 'mysql',
